@@ -1,18 +1,31 @@
-import { FlatList } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import CharacterItem from './CharacterItem'
+import { useQuery } from '@apollo/client'
+import { GET_CHARACTERS } from '../lib/graphql/queries'
 
 export default function CharacterList() {
-    const data = [
-      { id: 1, name: 'Rick Sanchez', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-      { id: 1, name: 'Rick Sanchez', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-      { id: 1, name: 'Rick Sanchez', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-      { id: 1, name: 'Rick Sanchez', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-      { id: 1, name: 'Rick Sanchez', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-    ]
+  const { loading, error, data } = useQuery<CharacterResponse>(GET_CHARACTERS)
+
+  if (error) {
+    return (
+      <View>
+        <Text>Error fetching characters</Text>
+      </View>
+    )
+  }
+
+  if (loading) {
+    return (
+      <View>
+        <Text>loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <FlatList
-      data={data}
+      style={{ width: '100%' }}
+      data={data?.characters.results}
       renderItem={({ item }) => {
         return (
          <CharacterItem item={item} />

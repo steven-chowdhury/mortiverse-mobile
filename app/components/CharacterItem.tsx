@@ -7,6 +7,7 @@ interface CharacterItemProps {
 export default function CharacterItem({ item }: CharacterItemProps) {
   const styles = StyleSheet.create({
     itemContainer: {
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       padding: 10,
@@ -21,7 +22,7 @@ export default function CharacterItem({ item }: CharacterItemProps) {
     text: {
       fontSize: 16,
     },
-  });
+  })
 
   return (
     <View style={styles.itemContainer}>

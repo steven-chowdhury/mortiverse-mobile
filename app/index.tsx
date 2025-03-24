@@ -1,6 +1,5 @@
-import { View } from 'react-native'
-import CharacterList from './components/CharacterList'
 import { ApolloClient,InMemoryCache, ApolloProvider } from '@apollo/client'
+import Home from './components/Home'
 
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
@@ -9,16 +8,8 @@ const client = new ApolloClient({
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-      }}
-    >
-      <ApolloProvider client={client}>
-        <CharacterList />
-      </ApolloProvider>
-    </View>
+    <ApolloProvider client={client}>
+      <Home />
+    </ApolloProvider>
   );
 }

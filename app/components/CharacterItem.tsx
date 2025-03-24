@@ -1,4 +1,5 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { router } from 'expo-router'
 
 interface CharacterItemProps {
   item: Character
@@ -25,9 +26,23 @@ export default function CharacterItem({ item }: CharacterItemProps) {
   })
 
   return (
-    <View style={styles.itemContainer}>
-      <Image style={styles.image} source={{ uri: item.image}}/>
-      <Text>{item.name}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() => router.push({ 
+        pathname: `/detail/[id]`,
+        params: { 
+          id: item.id,
+          name: item.name,
+          image: item.image,
+          species: item.species,
+          status: item.status,
+          location: item.location.name
+        }
+      })}
+    >
+      <View style={styles.itemContainer}>
+        <Image style={styles.image} source={{ uri: item.image}}/>
+        <Text>{item.name}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }

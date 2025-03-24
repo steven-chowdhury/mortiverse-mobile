@@ -26,6 +26,7 @@ export default function CharacterList() {
     <FlatList
       style={{ width: '100%' }}
       data={data?.characters.results}
+      keyExtractor={item => item.id}
       renderItem={({ item }) => {
         return (
          <CharacterItem item={item} />
